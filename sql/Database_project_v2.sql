@@ -25,12 +25,13 @@ drop table if exists VETERINARIA;
 /*==============================================================*/
 create table CITAS
 (
+   ID_CITA              int not null,
    ID_VETERINARIA       int not null,
    CEDULA_DUENO         varchar(20) not null,
    ID_MASCOTA           int not null,
    FECHA_CITA           datetime not null,
    TIPO_CITA            varchar(150) not null,
-   primary key (ID_VETERINARIA, CEDULA_DUENO, ID_MASCOTA)
+   primary key (ID_CITA)
 );
 
 /*==============================================================*/
@@ -91,8 +92,8 @@ create table DUENOS
 /*==============================================================*/
 create table MASCOTAS
 (
-   CEDULA_DUENO         varchar(20) not null,
    ID_MASCOTA           int not null,
+   CEDULA_DUENO         varchar(20) not null,
    NOMBRE_MASCOTA       varchar(150) not null,
    ESPECIE              varchar(150) not null,
    RAZA                 varchar(150) not null,
@@ -113,7 +114,6 @@ create table MEDICOS
    MATRICULA_PROFESIONAL varchar(150) not null,
    CORREO_MEDICO        varchar(150) not null,
    CONTRASENIA_MEDICO   varchar(150) not null,
-   ROL_VETERNARIA       varchar(150),
    primary key (CEDULA_MEDICO)
 );
 
@@ -146,12 +146,13 @@ create table RESPUESTAS
 /*==============================================================*/
 create table VACUNACION
 (
+   ID_VACUNA            int not null,
    CEDULA_DUENO         varchar(20) not null,
    ID_MASCOTA           int not null,
    CEDULA_MEDICO        varchar(150) not null,
    DESCRIPCION_VACUNA   varchar(150) not null,
-   FECHA_VACUNA         date not null,
-   primary key (CEDULA_DUENO, ID_MASCOTA, CEDULA_MEDICO)
+   FECHA_VACUNA         varchar(150) not null,
+   primary key (ID_VACUNA)
 );
 
 /*==============================================================*/
@@ -204,7 +205,7 @@ alter table RESPUESTAS add constraint FK_RESPONDE foreign key (CEDULA_MEDICO)
 alter table RESPUESTAS add constraint FK_RESPUESTA foreign key (CEDULA_DUENO, ID_PREGUNTA)
       references PREGUNTAS (CEDULA_DUENO, ID_PREGUNTA) on delete restrict on update restrict;
 
-alter table VACUNACION add constraint FK_MASCOTA_VACUNA foreign key (CEDULA_DUENO, ID_MASCOTA)
+alter table VACUNACION add constraint FK_VACUNACION foreign key (CEDULA_DUENO, ID_MASCOTA)
       references MASCOTAS (CEDULA_DUENO, ID_MASCOTA) on delete restrict on update restrict;
 
 alter table VACUNACION add constraint FK_VACUNA_MED foreign key (CEDULA_MEDICO)
