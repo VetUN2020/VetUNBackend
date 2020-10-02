@@ -1,9 +1,11 @@
 package com.vetun.apirest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="mascotas")
@@ -25,6 +27,14 @@ public class Mascota {
 
     @Column(name="raza")
     private String raza;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idMascota")
+    private List<Vacunacion> vacunas;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idMascota")
+    private List<Citas> citas;
 
     public Mascota(){}
 
