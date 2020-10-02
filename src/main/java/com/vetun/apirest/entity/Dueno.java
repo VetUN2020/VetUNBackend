@@ -1,113 +1,125 @@
 package com.vetun.apirest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="duenos")
 public class Dueno {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="cedula_dueno")
-    private int id;
+    private String cedulaDueno;
 
     @Column(name="nombre_dueno")
-    private String nombre;
+    private String nombreDueno;
 
     @Column(name="apellido_dueno")
-    private String apellido;
+    private String apellidoDueno;
 
     @Column(name="telefono_dueno")
-    @CreationTimestamp
-    private int telefono;
+    private int telefonoDueno;
 
     @Column(name="direccion_casa")
-    @UpdateTimestamp
-    private String direccion;
+    private String direccionCasa;
 
     @Column(name="correo_electronico")
-    @UpdateTimestamp
-    private String correo;
+    private String correoElectronico;
 
     @Column(name="contrasenia_dueno")
-    @UpdateTimestamp
-    private String contrasenia;
+    private String contraseniaDueno;
 
-    public Dueno(int id,String correo, String contrasenia) {
-        this.id = id;
-        this.correo = correo;
-        this.contrasenia = contrasenia;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cedulaDueno")
+    private List<Mascota> mascotas;
+
+    public Dueno(){
+
     }
 
-    public int getId() {
-        return id;
+    public Dueno(String cedulaDueno, String correoElectronico, String contraseniaDueno) {
+        this.cedulaDueno = cedulaDueno;
+        this.correoElectronico = correoElectronico;
+        this.contraseniaDueno = contraseniaDueno;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getCedulaDueno() {
+        return cedulaDueno;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void setCedulaDueno(String cedulaDueno) {
+        this.cedulaDueno = cedulaDueno;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getNombreDueno() {
+        return nombreDueno;
     }
 
-    public String getApellido() {
-        return apellido;
+    public void setNombreDueno(String nombreDueno) {
+        this.nombreDueno = nombreDueno;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public String getApellidoDueno() {
+        return apellidoDueno;
     }
 
-    public int getTelefono() {
-        return telefono;
+    public void setApellidoDueno(String apellidoDueno) {
+        this.apellidoDueno = apellidoDueno;
     }
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
+    public int getTelefonoDueno() {
+        return telefonoDueno;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public void setTelefonoDueno(int telefonoDueno) {
+        this.telefonoDueno = telefonoDueno;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public String getDireccionCasa() {
+        return direccionCasa;
     }
 
-    public String getCorreo() {
-        return correo;
+    public void setDireccionCasa(String direccionCasa) {
+        this.direccionCasa = direccionCasa;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public String getCorreoElectronico() {
+        return correoElectronico;
     }
 
-    public String getContrasenia() {
-        return contrasenia;
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
     }
 
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public String getContraseniaDueno() {
+        return contraseniaDueno;
+    }
+
+    public void setContraseniaDueno(String contraseniaDueno) {
+        this.contraseniaDueno = contraseniaDueno;
+    }
+
+    public List<Mascota> getMascotas() {
+        return mascotas;
+    }
+
+    public void setMascotas(List<Mascota> mascotas) {
+        this.mascotas = mascotas;
     }
 
     @Override
     public String toString() {
         return "Dueno{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", telefono=" + telefono +
-                ", direccion='" + direccion + '\'' +
-                ", correo='" + correo + '\'' +
-                ", contrasenia='" + contrasenia + '\'' +
+                "cedulaDueno=" + cedulaDueno +
+                ", nombreDueno='" + nombreDueno + '\'' +
+                ", apellidoDueno='" + apellidoDueno + '\'' +
+                ", telefonoDueno=" + telefonoDueno +
+                ", direccionCasa='" + direccionCasa + '\'' +
+                ", correoElectronico='" + correoElectronico + '\'' +
+                ", contraseniaDueno='" + contraseniaDueno + '\'' +
                 '}';
     }
 }
