@@ -30,8 +30,6 @@ public class DuenoRestController {
         return mascotas;
     }
 
-
-
     @GetMapping("/duenos/{duenoId}")
     public Dueno getDueno(@PathVariable String duenoId){
         Dueno dueno = duenoService.findById(duenoId);
