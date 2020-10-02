@@ -25,9 +25,8 @@ drop table if exists VETERINARIA;
 /*==============================================================*/
 create table CITAS
 (
-   ID_CITA              int not null,
+   ID_CITA              int not null auto_increment,
    ID_VETERINARIA       int not null,
-   CEDULA_DUENO         varchar(20) not null,
    ID_MASCOTA           int not null,
    FECHA_CITA           datetime not null,
    TIPO_CITA            varchar(150) not null,
@@ -39,12 +38,12 @@ create table CITAS
 /*==============================================================*/
 create table COMENTARIOS_MEDICOS
 (
+   ID_COMENTARIO_M      int not null auto_increment,
    CEDULA_DUENO         varchar(20) not null,
    CEDULA_MEDICO        varchar(150) not null,
-   ID_COMENTARIO_M      int not null,
    COMENTARIO_M         varchar(150),
    PUNTUACION_M         float(8) not null,
-   primary key (CEDULA_DUENO, CEDULA_MEDICO, ID_COMENTARIO_M)
+   primary key (ID_COMENTARIO_M)
 );
 
 /*==============================================================*/
@@ -52,12 +51,12 @@ create table COMENTARIOS_MEDICOS
 /*==============================================================*/
 create table COMENTARIOS_VETERINARIA
 (
+   ID_COMENTARIO_V      int not null auto_increment,
    CEDULA_DUENO         varchar(20) not null,
    ID_VETERINARIA       int not null,
-   ID_COMENTARIO_V      int not null,
    COMENTARIO_V         varchar(150),
    PUNTUACION_V         float(8) not null,
-   primary key (CEDULA_DUENO, ID_VETERINARIA, ID_COMENTARIO_V)
+   primary key (ID_COMENTARIO_V)
 );
 
 /*==============================================================*/
@@ -65,11 +64,11 @@ create table COMENTARIOS_VETERINARIA
 /*==============================================================*/
 create table COSTO_ATENCION
 (
-   ID_COSTO             int not null,
+   ID_COSTO             int not null auto_increment,
    CEDULA_MEDICO        varchar(150) not null,
    DESCRIPCION_COSTO    varchar(150) not null,
    COSTO                int not null,
-   primary key (CEDULA_MEDICO, ID_COSTO)
+   primary key (ID_COSTO)
 );
 
 /*==============================================================*/
@@ -92,12 +91,12 @@ create table DUENOS
 /*==============================================================*/
 create table MASCOTAS
 (
-   ID_MASCOTA           int not null,
+   ID_MASCOTA           int not null auto_increment,
    CEDULA_DUENO         varchar(20) not null,
    NOMBRE_MASCOTA       varchar(150) not null,
    ESPECIE              varchar(150) not null,
    RAZA                 varchar(150) not null,
-   primary key (CEDULA_DUENO, ID_MASCOTA)
+   primary key (ID_MASCOTA)
 );
 
 /*==============================================================*/
@@ -122,10 +121,10 @@ create table MEDICOS
 /*==============================================================*/
 create table PREGUNTAS
 (
+   ID_PREGUNTA          int not null auto_increment,
    CEDULA_DUENO         varchar(20) not null,
-   ID_PREGUNTA          int not null,
    PREGUNTA             longtext not null,
-   primary key (CEDULA_DUENO, ID_PREGUNTA)
+   primary key (ID_PREGUNTA)
 );
 
 /*==============================================================*/
@@ -133,12 +132,11 @@ create table PREGUNTAS
 /*==============================================================*/
 create table RESPUESTAS
 (
+   ID_RESPUESTA         int not null auto_increment,
    CEDULA_MEDICO        varchar(150) not null,
-   CEDULA_DUENO         varchar(20) not null,
    ID_PREGUNTA          int not null,
-   ID_RESPUESTA         int not null,
    RESPUESTA            varchar(150) not null,
-   primary key (CEDULA_MEDICO, CEDULA_DUENO, ID_PREGUNTA, ID_RESPUESTA)
+   primary key (ID_RESPUESTA)
 );
 
 /*==============================================================*/
@@ -146,8 +144,7 @@ create table RESPUESTAS
 /*==============================================================*/
 create table VACUNACION
 (
-   ID_VACUNA            int not null,
-   CEDULA_DUENO         varchar(20) not null,
+   ID_VACUNA            int not null auto_increment,
    ID_MASCOTA           int not null,
    CEDULA_MEDICO        varchar(150) not null,
    DESCRIPCION_VACUNA   varchar(150) not null,
@@ -160,7 +157,7 @@ create table VACUNACION
 /*==============================================================*/
 create table VETERINARIA
 (
-   ID_VETERINARIA       int not null,
+   ID_VETERINARIA       int not null auto_increment,
    NOMBRE_VETERINARIA   varchar(150) not null,
    DIRECCION_VETERINARIA varchar(150) not null,
    TELEFONO_VETERINARIA int not null,
@@ -169,8 +166,8 @@ create table VETERINARIA
    primary key (ID_VETERINARIA)
 );
 
-alter table CITAS add constraint FK_ATENDIDO foreign key (CEDULA_DUENO, ID_MASCOTA)
-      references MASCOTAS (CEDULA_DUENO, ID_MASCOTA) on delete restrict on update restrict;
+alter table CITAS add constraint FK_ATENDIDO foreign key (ID_MASCOTA)
+      references MASCOTAS (ID_MASCOTA) on delete restrict on update restrict;
 
 alter table CITAS add constraint FK_ATIENDE foreign key (ID_VETERINARIA)
       references VETERINARIA (ID_VETERINARIA) on delete restrict on update restrict;
@@ -202,11 +199,11 @@ alter table PREGUNTAS add constraint FK_PREGUNTA foreign key (CEDULA_DUENO)
 alter table RESPUESTAS add constraint FK_RESPONDE foreign key (CEDULA_MEDICO)
       references MEDICOS (CEDULA_MEDICO) on delete restrict on update restrict;
 
-alter table RESPUESTAS add constraint FK_RESPUESTA foreign key (CEDULA_DUENO, ID_PREGUNTA)
-      references PREGUNTAS (CEDULA_DUENO, ID_PREGUNTA) on delete restrict on update restrict;
+alter table RESPUESTAS add constraint FK_RESPUESTA foreign key (ID_PREGUNTA)
+      references PREGUNTAS (ID_PREGUNTA) on delete restrict on update restrict;
 
-alter table VACUNACION add constraint FK_VACUNACION foreign key (CEDULA_DUENO, ID_MASCOTA)
-      references MASCOTAS (CEDULA_DUENO, ID_MASCOTA) on delete restrict on update restrict;
+alter table VACUNACION add constraint FK_VACUNACION foreign key (ID_MASCOTA)
+      references MASCOTAS (ID_MASCOTA) on delete restrict on update restrict;
 
 alter table VACUNACION add constraint FK_VACUNA_MED foreign key (CEDULA_MEDICO)
       references MEDICOS (CEDULA_MEDICO) on delete restrict on update restrict;
