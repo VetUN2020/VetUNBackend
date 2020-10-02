@@ -3,7 +3,6 @@ package com.vetun.apirest.service;
 import com.vetun.apirest.dao.DuenoDAO;
 import com.vetun.apirest.entity.Dueno;
 import com.vetun.apirest.entity.Mascota;
-import com.vetun.apirest.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +16,12 @@ public class DuenoServiceImpl implements DuenoService{
     @Autowired
     public void setDuenoDao (DuenoDAO duenoDao) {
         this.duenoDao = duenoDao;
+    }
+
+    @Override
+    public List<Dueno> findAll() {
+        List<Dueno> listDuenos= duenoDao.findAll();
+        return listDuenos;
     }
 
     @Override

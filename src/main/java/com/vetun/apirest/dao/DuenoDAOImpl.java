@@ -2,7 +2,6 @@ package com.vetun.apirest.dao;
 
 import com.vetun.apirest.entity.Dueno;
 import com.vetun.apirest.entity.Mascota;
-import com.vetun.apirest.entity.Usuario;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,18 @@ import java.util.List;
 public class DuenoDAOImpl implements DuenoDAO{
     @Autowired
     private EntityManager entityManager;
+
+    @Override
+    public List<Dueno> findAll() {
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query<Dueno> theQuery = currentSession.createQuery("FROM Dueno", Dueno.class);
+
+        List<Dueno> duenos = theQuery.getResultList();
+
+        return duenos;
+
+    }
 
     @Override
     public List<Mascota> findMascota(String id) {
