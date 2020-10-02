@@ -19,6 +19,11 @@ public class DuenoRestController {
     @Autowired
     private DuenoService duenoService;
 
+    @GetMapping("/duenos")
+    public List<Dueno> findAll(){
+        return duenoService.findAll();
+    }
+
     @GetMapping("/duenos/{duenoId}/mascotas")
     public List<Mascota> getMascotas(@PathVariable String duenoId){
         List<Mascota> mascotas = duenoService.findMascota(duenoId);
