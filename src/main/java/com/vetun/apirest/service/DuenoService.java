@@ -12,4 +12,6 @@ public interface DuenoService {
     public List<Mascota> findMascota(String id);
 
     public Dueno findById(String id);
+
+    public void save(Dueno dueno);
 }

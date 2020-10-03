@@ -22,11 +22,9 @@ public class Usuario {
     private String password;
 
     @Column(name="created_at")
-    @CreationTimestamp
     private Date createdAt;
 
     @Column(name="updated_at")
-    @UpdateTimestamp
     private Date updatedAt;
 
     public Usuario() {

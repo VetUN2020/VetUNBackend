@@ -25,7 +25,7 @@ public class MedicosServiceImpl implements MedicosService{
     }
 
     @Override
-    public Medicos findById(String id) {
+    public Medicos findById(int id) {
         Medicos medico = medicosDao.findById(id);
         return medico;
     }

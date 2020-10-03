@@ -6,9 +6,13 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="medicos")
+@Table(name="medico")
 public class Medicos {
     @Id
+    @Column(name="id_medico")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int idMedico;
+
     @Column(name="cedula_medico")
     private String cedulaMedico;
 
@@ -38,21 +42,18 @@ public class Medicos {
     private String contraseniaMedico;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cedulaMedico")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idMedico")
     private List<Vacunacion> vacunados;
 
     public Medicos() {
     }
 
-    public Medicos(String cedulaMedico, String nombreMedico, String apellidoMedico, String direccionResidencia, int telefonoMedico, String matriculaProfesional, String correoMedico, String contraseniaMedico) {
-        this.cedulaMedico = cedulaMedico;
-        this.nombreMedico = nombreMedico;
-        this.apellidoMedico = apellidoMedico;
-        this.direccionResidencia = direccionResidencia;
-        this.telefonoMedico = telefonoMedico;
-        this.matriculaProfesional = matriculaProfesional;
-        this.correoMedico = correoMedico;
-        this.contraseniaMedico = contraseniaMedico;
+    public int getIdMedico() {
+        return idMedico;
+    }
+
+    public void setIdMedico(int idMedico) {
+        this.idMedico = idMedico;
     }
 
     public String getCedulaMedico() {
@@ -138,7 +139,8 @@ public class Medicos {
     @Override
     public String toString() {
         return "Medicos{" +
-                "cedulaMedico='" + cedulaMedico + '\'' +
+                "idMedico=" + idMedico +
+                ", cedulaMedico='" + cedulaMedico + '\'' +
                 ", idVeterinaria=" + idVeterinaria +
                 ", nombreMedico='" + nombreMedico + '\'' +
                 ", apellidoMedico='" + apellidoMedico + '\'' +
@@ -147,6 +149,7 @@ public class Medicos {
                 ", matriculaProfesional='" + matriculaProfesional + '\'' +
                 ", correoMedico='" + correoMedico + '\'' +
                 ", contraseniaMedico='" + contraseniaMedico + '\'' +
+                ", vacunados=" + vacunados +
                 '}';
     }
 }

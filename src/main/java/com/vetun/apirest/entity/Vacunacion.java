@@ -1,6 +1,7 @@
 package com.vetun.apirest.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="vacunacion")
@@ -16,23 +17,39 @@ public class Vacunacion {
     private Mascota idMascota;
 
     @ManyToOne
-    @JoinColumn(name="cedula_medico")
-    private Medicos cedulaMedico;
+    @JoinColumn(name="id_medico")
+    private Medicos idMedico;
 
     @Column(name="descripcion_vacuna")
     private String descripcionVacuna;
 
     @Column(name="fecha_vacuna")
-    private String fechaVacuna;
+    private Date fechaVacuna;
 
     public Vacunacion() {
 
     }
 
-    public Vacunacion(int idVacuna, String descripcionVacuna, String fechaVacuna) {
+    public Vacunacion(int idVacuna, String descripcionVacuna, Date fechaVacuna) {
         this.idVacuna = idVacuna;
         this.descripcionVacuna = descripcionVacuna;
         this.fechaVacuna = fechaVacuna;
+    }
+
+    public Date getFechaVacuna() {
+        return fechaVacuna;
+    }
+
+    public void setFechaVacuna(Date fechaVacuna) {
+        this.fechaVacuna = fechaVacuna;
+    }
+
+    public Medicos getIdMedico() {
+        return idMedico;
+    }
+
+    public void setIdMedico(Medicos idMedico) {
+        this.idMedico = idMedico;
     }
 
     public int getIdVacuna() {
@@ -51,14 +68,6 @@ public class Vacunacion {
         this.idMascota = idMascota;
     }
 
-    public Medicos getCedulaMedico() {
-        return cedulaMedico;
-    }
-
-    public void setCedulaMedico(Medicos cedulaMedico) {
-        this.cedulaMedico = cedulaMedico;
-    }
-
     public String getDescripcionVacuna() {
         return descripcionVacuna;
     }
@@ -67,22 +76,14 @@ public class Vacunacion {
         this.descripcionVacuna = descripcionVacuna;
     }
 
-    public String getFechaVacuna() {
-        return fechaVacuna;
-    }
-
-    public void setFechaVacuna(String fechaVacuna) {
-        this.fechaVacuna = fechaVacuna;
-    }
-
     @Override
     public String toString() {
         return "Vacunacion{" +
                 "idVacuna=" + idVacuna +
-                ", idMascota='" + idMascota + '\'' +
-                ", cedulaMedico='" + cedulaMedico + '\'' +
+                ", idMascota=" + idMascota +
+                ", idMedico=" + idMedico +
                 ", descripcionVacuna='" + descripcionVacuna + '\'' +
-                ", fechaVacuna='" + fechaVacuna + '\'' +
+                ", fechaVacuna=" + fechaVacuna +
                 '}';
     }
 }

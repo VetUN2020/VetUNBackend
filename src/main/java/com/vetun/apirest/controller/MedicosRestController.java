@@ -25,7 +25,7 @@ public class MedicosRestController {
     }
 
     @GetMapping("/medicos/{medicoId}")
-    public Medicos getMedico(@PathVariable String medicoId){
+    public Medicos getMedico(@PathVariable int medicoId){
         Medicos medico = medicosService.findById(medicoId);
         if(medico == null) {
             throw new RuntimeException("User id not found -"+medicoId);
