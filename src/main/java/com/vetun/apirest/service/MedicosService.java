@@ -7,5 +7,5 @@ import java.util.List;
 public interface MedicosService {
     public List<Medicos> findAll();
 
-    public Medicos findById(String id);
+    public Medicos findById(int id);
 }

@@ -29,7 +29,7 @@ public class MedicoDAOImpl implements MedicosDAO{
     }
 
     @Override
-    public Medicos findById(String id) {
+    public Medicos findById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
         Medicos medico = currentSession.get(Medicos.class, id);

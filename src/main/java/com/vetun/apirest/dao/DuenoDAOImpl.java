@@ -28,6 +28,14 @@ public class DuenoDAOImpl implements DuenoDAO{
     }
 
     @Override
+    public void save(Dueno dueno) {
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        currentSession.saveOrUpdate(dueno);
+
+    }
+
+    @Override
     public List<Mascota> findMascota(String id) {
         Session currentSession = entityManager.unwrap(Session.class);
 

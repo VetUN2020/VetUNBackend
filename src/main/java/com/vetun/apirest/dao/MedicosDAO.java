@@ -7,5 +7,5 @@ public interface MedicosDAO {
 
     public List<Medicos> findAll();
 
-    public Medicos findById(String id);
+    public Medicos findById(int id);
 }
