@@ -49,7 +49,7 @@ public class DuenoDAOImpl implements DuenoDAO{
     }
 
     @Override
-    public Dueno findById(String id) {
+    public Dueno findById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
         Dueno dueno = currentSession.get(Dueno.class, id);

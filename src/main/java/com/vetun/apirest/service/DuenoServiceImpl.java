@@ -37,7 +37,7 @@ public class DuenoServiceImpl implements DuenoService{
     }
 
     @Override
-    public Dueno findById(String id) {
+    public Dueno findById(int id) {
         Dueno dueno = duenoDao.findById(id);
         return dueno;
     }

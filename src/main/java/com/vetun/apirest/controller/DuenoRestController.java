@@ -37,7 +37,7 @@ public class DuenoRestController {
     }
 
     @GetMapping("/duenos/{duenoId}")
-    public Dueno getDueno(@PathVariable String duenoId){
+    public Dueno getDueno(@PathVariable int duenoId){
         Dueno dueno = duenoService.findById(duenoId);
 
         if(dueno == null) {
