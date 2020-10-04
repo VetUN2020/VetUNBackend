@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name="duenos")
 public class Dueno {
+
     @Id
     @Column(name="cedula_dueno")
     private String cedulaDueno;
