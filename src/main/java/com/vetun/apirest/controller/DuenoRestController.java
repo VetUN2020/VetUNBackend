@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @RestController
+//@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.PUT,RequestMethod.POST})
 @RequestMapping("/api")
 public class DuenoRestController {
 
@@ -47,14 +48,17 @@ public class DuenoRestController {
         return dueno;
     }
 
-    @GetMapping("/duenos/login")
+    @CrossOrigin(origins = "http://localhost:8080")
+    @PostMapping("/duenos/login")
     public Dueno getDuenoEmail(@RequestBody Dueno duenoP){
         String email = duenoP.getCorreoElectronico();
-        Dueno dueno = duenoService.findByEmail(email);
+        String password = duenoP.getContraseniaDueno();
+        System.out.println(email + " "+password);
+        Dueno dueno = duenoService.findByEmail(email,password);
 
         if(dueno == null) {
-            //throw new RuntimeException("User email not found -"+email);
-            System.out.println("User email not found -"+email);
+            throw new RuntimeException("User or password incorrect");
+            //System.out.println("User email not found -"+email);
         }
         return dueno;
     }
