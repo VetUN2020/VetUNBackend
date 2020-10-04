@@ -43,8 +43,8 @@ public class DuenoServiceImpl implements DuenoService{
     }
 
     @Override
-    public Dueno findByEmail(String email){
-        Dueno dueno = duenoDao.findByEmail(email);
+    public Dueno findByEmail(String email, String password){
+        Dueno dueno = duenoDao.findByEmail(email,password);
         return dueno;
     }
 }
