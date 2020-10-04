@@ -1,17 +1,19 @@
 package com.vetun.apirest.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="duenos")
+@Table(name="dueno")
 public class Dueno {
 
     @Id
+    @Column(name="id_dueno")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int idDueno;
+
     @Column(name="cedula_dueno")
     private String cedulaDueno;
 
@@ -34,17 +36,29 @@ public class Dueno {
     private String contraseniaDueno;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cedulaDueno")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idDueno")
     private List<Mascota> mascotas;
 
     public Dueno(){
 
     }
 
-    public Dueno(String cedulaDueno, String correoElectronico, String contraseniaDueno) {
-        this.cedulaDueno = cedulaDueno;
+    public Dueno(int idDueno, String correoElectronico, String contraseniaDueno) {
+        this.idDueno = idDueno;
         this.correoElectronico = correoElectronico;
         this.contraseniaDueno = contraseniaDueno;
+    }
+
+    public int getIdDueno() {
+        return idDueno;
+    }
+
+    public void setIdDueno(int idDueno) {
+        this.idDueno = idDueno;
+    }
+
+    public Dueno(String cedulaDueno) {
+        this.cedulaDueno = cedulaDueno;
     }
 
     public String getCedulaDueno() {
@@ -114,13 +128,15 @@ public class Dueno {
     @Override
     public String toString() {
         return "Dueno{" +
-                "cedulaDueno=" + cedulaDueno +
+                "idDueno=" + idDueno +
+                ", cedulaDueno='" + cedulaDueno + '\'' +
                 ", nombreDueno='" + nombreDueno + '\'' +
                 ", apellidoDueno='" + apellidoDueno + '\'' +
                 ", telefonoDueno=" + telefonoDueno +
                 ", direccionCasa='" + direccionCasa + '\'' +
                 ", correoElectronico='" + correoElectronico + '\'' +
                 ", contraseniaDueno='" + contraseniaDueno + '\'' +
+                ", mascotas=" + mascotas +
                 '}';
     }
 }

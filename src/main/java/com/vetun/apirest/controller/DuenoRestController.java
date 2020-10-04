@@ -2,13 +2,9 @@ package com.vetun.apirest.controller;
 
 import com.vetun.apirest.entity.Dueno;
 import com.vetun.apirest.entity.Mascota;
-import com.vetun.apirest.entity.Usuario;
 import com.vetun.apirest.service.DuenoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,15 +15,26 @@ public class DuenoRestController {
     @Autowired
     private DuenoService duenoService;
 
+    @GetMapping("/duenos")
+    public List<Dueno> findAll(){
+        return duenoService.findAll();
+    }
+
     @GetMapping("/duenos/{duenoId}/mascotas")
     public List<Mascota> getMascotas(@PathVariable String duenoId){
         List<Mascota> mascotas = duenoService.findMascota(duenoId);
         return mascotas;
     }
 
+    @PostMapping("/duenos")
+    public Dueno addDueno(@RequestBody Dueno dueno) {
+        dueno.setIdDueno(0);
+        //Este metodo guardará al usuario enviado
+        duenoService.save(dueno);
 
+        return dueno;
 
-
+    }
 
     @GetMapping("/duenos/{duenoId}")
     public Dueno getDueno(@PathVariable String duenoId){

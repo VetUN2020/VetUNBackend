@@ -1,12 +1,12 @@
 package com.vetun.apirest.entity;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name="mascotas")
+@Table(name="mascota")
 public class Mascota {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -14,8 +14,8 @@ public class Mascota {
     private int idMascota;
 
     @ManyToOne
-    @JoinColumn(name="cedula_dueno")
-    private Dueno cedulaDueno;
+    @JoinColumn(name="id_dueno")
+    private Dueno idDueno;
 
     @Column(name="nombre_mascota")
     private String nombreMascota;
@@ -25,6 +25,14 @@ public class Mascota {
 
     @Column(name="raza")
     private String raza;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idMascota")
+    private List<Vacunacion> vacunas;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idMascota")
+    private List<Citas> citas;
 
     public Mascota(){}
 
@@ -38,14 +46,6 @@ public class Mascota {
 
     public void setIdMascota(int idMascota) {
         this.idMascota = idMascota;
-    }
-
-    public Dueno getCedulaDueno() {
-        return cedulaDueno;
-    }
-
-    public void setCedulaDueno(Dueno cedulaDueno) {
-        this.cedulaDueno = cedulaDueno;
     }
 
     public String getNombreMascota() {
@@ -76,10 +76,12 @@ public class Mascota {
     public String toString() {
         return "Mascota{" +
                 "idMascota=" + idMascota +
-                ", cedulaDueno='" + cedulaDueno + '\'' +
+                ", idDueno=" + idDueno +
                 ", nombreMascota='" + nombreMascota + '\'' +
-                ", especie=" + especie +
+                ", especie='" + especie + '\'' +
                 ", raza='" + raza + '\'' +
+                ", vacunas=" + vacunas +
+                ", citas=" + citas +
                 '}';
     }
 }
