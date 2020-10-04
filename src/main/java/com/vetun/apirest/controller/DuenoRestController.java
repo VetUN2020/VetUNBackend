@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Scanner;
 
 @RestController
 @RequestMapping("/api")
@@ -31,7 +32,6 @@ public class DuenoRestController {
         dueno.setIdDueno(0);
         //Este metodo guardará al usuario enviado
         duenoService.save(dueno);
-
         return dueno;
 
     }
@@ -46,4 +46,17 @@ public class DuenoRestController {
         //retornará al usuario con id pasado en la url
         return dueno;
     }
+
+    @GetMapping("/duenos/login")
+    public Dueno getDuenoEmail(@RequestBody Dueno duenoP){
+        String email = duenoP.getCorreoElectronico();
+        Dueno dueno = duenoService.findByEmail(email);
+
+        if(dueno == null) {
+            //throw new RuntimeException("User email not found -"+email);
+            System.out.println("User email not found -"+email);
+        }
+        return dueno;
+    }
+
 }

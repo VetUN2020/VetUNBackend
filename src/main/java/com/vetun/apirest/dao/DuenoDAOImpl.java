@@ -7,6 +7,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class DuenoDAOImpl implements DuenoDAO{
     public List<Mascota> findMascota(String id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<Mascota> theQuery = currentSession.createQuery("FROM Mascota M WHERE M.cedulaDueno.cedulaDueno=:idUser", Mascota.class);
+        Query<Mascota> theQuery = currentSession.createQuery("FROM Mascota M WHERE M.idDueno.cedulaDueno=:idUser", Mascota.class);
         theQuery.setParameter("idUser", id);
         List<Mascota> mascotas = theQuery.getResultList();
 
@@ -53,6 +54,21 @@ public class DuenoDAOImpl implements DuenoDAO{
 
         Dueno dueno = currentSession.get(Dueno.class, id);
 
+        return dueno;
+    }
+
+    @Override
+    public Dueno findByEmail(String email){
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query<Dueno> theQuery = currentSession.createQuery("FROM Dueno D WHERE D.correoElectronico=:email", Dueno.class);
+        theQuery.setParameter("email", email);
+
+        List<Dueno> results = theQuery.getResultList();
+        Dueno dueno = null;
+        if(!results.isEmpty()){
+             dueno = results.get(0);
+        }
         return dueno;
     }
 }
