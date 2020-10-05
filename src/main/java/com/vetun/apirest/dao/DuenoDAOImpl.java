@@ -49,7 +49,7 @@ public class DuenoDAOImpl implements DuenoDAO{
     }
 
     @Override
-    public Dueno findById(String id) {
+    public Dueno findById(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
         Dueno dueno = currentSession.get(Dueno.class, id);
@@ -71,5 +71,22 @@ public class DuenoDAOImpl implements DuenoDAO{
              dueno = results.get(0);
         }
         return dueno;
+    }
+
+    @Override
+    public boolean findEmail(String email){
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query<Dueno> theQuery = currentSession.createQuery("FROM Dueno D WHERE D.correoElectronico=:email", Dueno.class);
+        theQuery.setParameter("email", email);
+
+        List<Dueno> results = theQuery.getResultList();
+        Dueno dueno = null;
+        boolean existe = false;
+        if(!results.isEmpty()){
+            dueno = results.get(0);
+            existe = true;
+        }
+        return existe;
     }
 }

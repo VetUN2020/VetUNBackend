@@ -37,7 +37,7 @@ public class DuenoServiceImpl implements DuenoService{
     }
 
     @Override
-    public Dueno findById(String id) {
+    public Dueno findById(int id) {
         Dueno dueno = duenoDao.findById(id);
         return dueno;
     }
@@ -46,5 +46,11 @@ public class DuenoServiceImpl implements DuenoService{
     public Dueno findByEmail(String email, String password){
         Dueno dueno = duenoDao.findByEmail(email,password);
         return dueno;
+    }
+
+    @Override
+    public boolean findEmail(String email){
+        boolean existe = duenoDao.findEmail(email);
+        return existe;
     }
 }
