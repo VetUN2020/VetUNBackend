@@ -43,22 +43,12 @@ public class Dueno {
 
     }
 
-    public Dueno(int idDueno, String correoElectronico, String contraseniaDueno) {
-        this.idDueno = idDueno;
-        this.correoElectronico = correoElectronico;
-        this.contraseniaDueno = contraseniaDueno;
-    }
-
     public int getIdDueno() {
         return idDueno;
     }
 
     public void setIdDueno(int idDueno) {
         this.idDueno = idDueno;
-    }
-
-    public Dueno(String cedulaDueno) {
-        this.cedulaDueno = cedulaDueno;
     }
 
     public String getCedulaDueno() {
@@ -115,14 +105,6 @@ public class Dueno {
 
     public void setContraseniaDueno(String contraseniaDueno) {
         this.contraseniaDueno = contraseniaDueno;
-    }
-
-    public List<Mascota> getMascotas() {
-        return mascotas;
-    }
-
-    public void setMascotas(List<Mascota> mascotas) {
-        this.mascotas = mascotas;
     }
 
     @Override

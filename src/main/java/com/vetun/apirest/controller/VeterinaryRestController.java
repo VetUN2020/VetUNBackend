@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/api")
 public class VeterinaryRestController {
 
     @Autowired
@@ -18,6 +20,7 @@ public class VeterinaryRestController {
         return veterinaryService.findAll();
     }
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/veterinarias")
     public Veterinaria addVeterinaria(@RequestBody Veterinaria veterinaria) {
         veterinaria.setIdVeterinaria(0);
