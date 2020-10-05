@@ -63,4 +63,13 @@ public class DuenoRestController {
         return dueno;
     }
 
+    @CrossOrigin(origins = "http://localhost:8080")
+    @PostMapping("/duenos/registro")
+    public boolean verificarDuenoEmail(@RequestBody Dueno duenoP){
+        String email = duenoP.getCorreoElectronico();
+        boolean existe = duenoService.findEmail(email);
+        
+        return existe;
+    }
+
 }

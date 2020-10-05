@@ -47,4 +47,10 @@ public class DuenoServiceImpl implements DuenoService{
         Dueno dueno = duenoDao.findByEmail(email,password);
         return dueno;
     }
+
+    @Override
+    public boolean findEmail(String email){
+        boolean existe = duenoDao.findEmail(email);
+        return existe;
+    }
 }

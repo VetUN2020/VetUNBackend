@@ -16,4 +16,6 @@ public interface DuenoDAO {
     public void save(Dueno dueno);
 
     public Dueno findByEmail(String email, String password);
+
+    public boolean findEmail(String email);
 }
