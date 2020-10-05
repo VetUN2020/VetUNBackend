@@ -20,7 +20,7 @@ public class VeterinaryDAOImpl implements VeterinaryDAO {
     public List<Veterinaria> findAll() {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<Veterinaria> theQuery = currentSession.createQuery("FROM Dueno", Veterinaria.class);
+        Query<Veterinaria> theQuery = currentSession.createQuery("FROM Veterinaria", Veterinaria.class);
 
         List<Veterinaria> veterinarias = theQuery.getResultList();
 

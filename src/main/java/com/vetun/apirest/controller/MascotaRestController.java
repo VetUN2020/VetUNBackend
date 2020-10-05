@@ -16,6 +16,7 @@ public class MascotaRestController {
 
     @PostMapping("/mascotas")
     public Mascota addMascota(@RequestBody Mascota mascota) {
+        System.out.println(mascota);
         mascota.setIdMascota(0);
 
         //Este metodo guardará al usuario enviado

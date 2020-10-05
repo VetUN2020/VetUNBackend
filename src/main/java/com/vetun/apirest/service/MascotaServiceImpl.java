@@ -19,7 +19,6 @@ public class MascotaServiceImpl implements MascotaService{
     @Override
     public void save(Mascota mascota) {
         mascotaDAO.save(mascota);
-
     }
 
     @Override

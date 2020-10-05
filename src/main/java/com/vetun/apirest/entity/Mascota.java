@@ -36,8 +36,22 @@ public class Mascota {
 
     public Mascota(){}
 
-    public Mascota(int idMascota) {
+    public Mascota(int idMascota, Dueno idDueno, String nombreMascota, String especie, String raza, List<Vacunacion> vacunas, List<Citas> citas) {
         this.idMascota = idMascota;
+        this.idDueno = idDueno;
+        this.nombreMascota = nombreMascota;
+        this.especie = especie;
+        this.raza = raza;
+        this.vacunas = vacunas;
+        this.citas = citas;
+    }
+
+    public Dueno getIdDueno() {
+        return idDueno;
+    }
+
+    public void setIdDueno(Dueno idDueno) {
+        this.idDueno = idDueno;
     }
 
     public int getIdMascota() {
