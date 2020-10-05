@@ -34,7 +34,6 @@ public class DuenoRestController {
         //Este metodo guardará al usuario enviado
         duenoService.save(dueno);
         return dueno;
-
     }
 
     @GetMapping("/duenos/{duenoId}")
@@ -67,9 +66,7 @@ public class DuenoRestController {
     @PostMapping("/duenos/registro")
     public boolean verificarDuenoEmail(@RequestBody Dueno duenoP){
         String email = duenoP.getCorreoElectronico();
-        boolean existe = duenoService.findEmail(email);
-        
-        return existe;
+        return duenoService.findEmail(email);
     }
 
 }
