@@ -38,7 +38,7 @@ public class DuenoRestController {
     }
 
     @GetMapping("/duenos/{duenoId}")
-    public Dueno getDueno(@PathVariable String duenoId){
+    public Dueno getDueno(@PathVariable int duenoId){
         Dueno dueno = duenoService.findById(duenoId);
 
         if(dueno == null) {
@@ -61,6 +61,15 @@ public class DuenoRestController {
             //System.out.println("User email not found -"+email);
         }
         return dueno;
+    }
+
+    @CrossOrigin(origins = "http://localhost:8080")
+    @PostMapping("/duenos/registro")
+    public boolean verificarDuenoEmail(@RequestBody Dueno duenoP){
+        String email = duenoP.getCorreoElectronico();
+        boolean existe = duenoService.findEmail(email);
+        
+        return existe;
     }
 
 }

@@ -11,9 +11,11 @@ public interface DuenoDAO {
 
     public List<Mascota> findMascota(String id);
 
-    public Dueno findById(String id);
+    public Dueno findById(int id);
 
     public void save(Dueno dueno);
 
     public Dueno findByEmail(String email, String password);
+
+    public boolean findEmail(String email);
 }
