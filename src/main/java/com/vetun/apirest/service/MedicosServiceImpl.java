@@ -29,4 +29,20 @@ public class MedicosServiceImpl implements MedicosService{
         Medicos medico = medicosDao.findById(id);
         return medico;
     }
+
+    @Override
+    public void save(Medicos medico){
+        medicosDao.save(medico);
+    }
+
+    @Override
+    public Medicos findByEmail(String email, String password){
+        Medicos medico = medicosDao.findByEmail(email, password);
+        return medico;
+    }
+
+    @Override
+    public boolean findEmail(String email){
+        return medicosDao.findEmail(email);
+    }
 }

@@ -37,4 +37,41 @@ public class MedicoDAOImpl implements MedicosDAO{
         return medico;
     }
 
+    @Override
+    public void save(Medicos medico){
+        Session currentSession = entityManager.unwrap(Session.class);
+        currentSession.saveOrUpdate(medico);
+    }
+
+    @Override
+    public Medicos findByEmail(String email, String password){
+        Session currentSession = entityManager.unwrap(Session.class);
+        Query<Medicos> theQuery = currentSession.createQuery("FROM Medicos M WHERE M.correoMedico=:email AND M.contraseniaMedico=:password", Medicos.class);
+        theQuery.setParameter("email", email);
+        theQuery.setParameter("password", password);
+
+        List<Medicos> results = theQuery.getResultList();
+        Medicos medico = null;
+        if(!results.isEmpty()){
+            medico = results.get(0);
+        }
+        return medico;
+    }
+
+    @Override
+    public boolean findEmail(String email){
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query<Medicos> theQuery = currentSession.createQuery("FROM Medicos M WHERE M.correoMedico=:email", Medicos.class);
+        theQuery.setParameter("email", email);
+
+        List<Medicos> results = theQuery.getResultList();
+        Medicos medico = null;
+        boolean existe = false;
+        if(!results.isEmpty()){
+            medico = results.get(0);
+            existe = true;
+        }
+        return existe;
+    }
 }
