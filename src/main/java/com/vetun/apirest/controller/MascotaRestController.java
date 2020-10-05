@@ -3,10 +3,9 @@ package com.vetun.apirest.controller;
 import com.vetun.apirest.entity.Mascota;
 import com.vetun.apirest.service.MascotaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -25,4 +24,35 @@ public class MascotaRestController {
         return mascota;
 
     }
+
+    @GetMapping("/mascotas")
+    public List<Mascota> findAll(){
+        return mascotaService.findAll();
+    }
+
+
+    @GetMapping("/mascotas/{idMascota}")
+    public Mascota getMascotaById(@PathVariable int idMascota){
+
+        Mascota mascota = mascotaService.findById(idMascota);
+
+        if (mascota == null){
+            throw new RuntimeException("Pet id not found ");
+        }
+
+        return mascota;
+    }
+
+    @GetMapping("/mascotas/{mascotaName}/{duenoId}")
+    public Mascota getMascotaByIdDuenoAndByMascotaName(@PathVariable String mascotaName, @PathVariable int duenoId){
+
+        Mascota mascota = mascotaService.findByName(mascotaName, duenoId);
+
+        if (mascota == null){
+            throw new RuntimeException("We can't find " + mascotaName);
+        }
+
+        return mascota;
+    }
+
 }
