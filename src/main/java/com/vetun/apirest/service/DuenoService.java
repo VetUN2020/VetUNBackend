@@ -15,7 +15,7 @@ public interface DuenoService {
 
     public void save(Dueno dueno);
 
-    public Dueno findByEmail(String email, String password);
+    public Dueno findByEmail(String email);
 
     public boolean findEmail(String email);
 }

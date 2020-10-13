@@ -58,12 +58,11 @@ public class DuenoDAOImpl implements DuenoDAO{
     }
 
     @Override
-    public Dueno findByEmail(String email, String password){
+    public Dueno findByEmail(String email){
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<Dueno> theQuery = currentSession.createQuery("FROM Dueno D WHERE D.correoElectronico=:email AND D.contraseniaDueno=:password", Dueno.class);
+        Query<Dueno> theQuery = currentSession.createQuery("FROM Dueno D WHERE D.correoElectronico=:email", Dueno.class);
         theQuery.setParameter("email", email);
-        theQuery.setParameter("password", password);
 
         List<Dueno> results = theQuery.getResultList();
         Dueno dueno = null;
