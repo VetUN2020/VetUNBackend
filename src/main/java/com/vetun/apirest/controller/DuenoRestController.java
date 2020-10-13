@@ -1,9 +1,12 @@
 package com.vetun.apirest.controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.vetun.apirest.entity.Dueno;
 import com.vetun.apirest.entity.Mascota;
 import com.vetun.apirest.service.DuenoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +19,13 @@ public class DuenoRestController {
 
     @Autowired
     private DuenoService duenoService;
+
+    //private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+
+    Pbkdf2PasswordEncoder encoder = new Pbkdf2PasswordEncoder("secretVet", 10000, 24);
+
+    /*@Autowired
+    private PasswordEncoder passwordEncoder;*/
 
     @GetMapping("/duenos")
     public List<Dueno> findAll(){
@@ -31,6 +41,10 @@ public class DuenoRestController {
     @PostMapping("/duenos")
     public Dueno addDueno(@RequestBody Dueno dueno) {
         dueno.setIdDueno(0);
+
+        String encodedPassword = encoder.encode(dueno.getContraseniaDueno());
+        dueno.setContraseniaDueno(encodedPassword);
+
         //Este metodo guardará al usuario enviado
         duenoService.save(dueno);
         return dueno;
@@ -48,14 +62,16 @@ public class DuenoRestController {
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
-    @PostMapping("/duenos/login")
+    @PostMapping("duenos/login/")
     public Dueno getDuenoEmail(@RequestBody Dueno duenoP){
         String email = duenoP.getCorreoElectronico();
-        String password = duenoP.getContraseniaDueno();
-        System.out.println(email + " "+password);
-        Dueno dueno = duenoService.findByEmail(email,password);
+        //String password = duenoP.getContraseniaDueno();
 
-        if(dueno == null) {
+        Dueno dueno = duenoService.findByEmail(email);
+        CharSequence pass = duenoP.getContraseniaDueno();
+        String encoded = dueno.getContraseniaDueno();
+
+        if(dueno == null || !encoder.matches(pass, encoded)) {
             throw new RuntimeException("User or password incorrect");
             //System.out.println("User email not found -"+email);
         }
