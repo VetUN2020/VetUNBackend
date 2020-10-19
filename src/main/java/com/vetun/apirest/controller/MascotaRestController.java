@@ -56,4 +56,9 @@ public class MascotaRestController {
         return mascota;
     }
 
+    @GetMapping("/mascotas/byIdDueno/{duenoId}")
+    public List<String> getByIdDueno(@PathVariable(value="duenoId") int duenoId){
+        return mascotaService.findByIdDueno(duenoId);
+    }
+
 }

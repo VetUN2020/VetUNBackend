@@ -12,4 +12,6 @@ public interface VeterinaryService {
 
     public void save(Veterinaria veterinaria);
 
+    public List<String> findAllName();
+
 }

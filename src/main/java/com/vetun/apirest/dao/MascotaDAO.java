@@ -14,4 +14,7 @@ public interface MascotaDAO {
 
     //Busca mascota segun el id del dueño y el nombre de la mascota
     public Mascota findByName(String name, int id);
+
+    //Busca mascota segun el id del dueño
+    public List<String> findByIdDueno(int idDueno);
 }
