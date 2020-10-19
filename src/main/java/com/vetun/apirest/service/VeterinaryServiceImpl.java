@@ -35,7 +35,10 @@ public class VeterinaryServiceImpl implements VeterinaryService {
 
     }
 
-
+    @Override
+    public List<String> findAllName() {
+        return veterinaryDAO.findAllName();
+    }
 
 
 }

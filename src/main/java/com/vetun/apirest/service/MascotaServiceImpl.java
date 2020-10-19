@@ -36,4 +36,9 @@ public class MascotaServiceImpl implements MascotaService{
         return mascotaDAO.findByName(name, id);
     }
 
+    @Override
+    public List<String> findByIdDueno(int idDueno) {
+        return mascotaDAO.findByIdDueno(idDueno);
+    }
+
 }

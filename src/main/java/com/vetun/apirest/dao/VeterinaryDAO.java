@@ -9,4 +9,6 @@ public interface VeterinaryDAO {
     public Veterinaria findById(int id);
 
     public void save(Veterinaria veterinaria);
+
+    public List<String> findAllName();
 }

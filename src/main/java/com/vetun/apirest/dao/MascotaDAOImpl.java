@@ -1,12 +1,14 @@
 package com.vetun.apirest.dao;
 
 import com.vetun.apirest.entity.Mascota;
+import com.vetun.apirest.entity.Veterinaria;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.util.LinkedList;
 import java.util.List;
 
 @Repository
@@ -54,6 +56,31 @@ public class MascotaDAOImpl implements MascotaDAO{
         theQuery.setParameter("nameM", name);
 
         return theQuery.getSingleResult();
+    }
+
+    @Override
+    public List<String> findByIdDueno(int idDueno) {
+
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query<Mascota> theQuery = currentSession.createQuery("FROM Mascota M WHERE M.idDueno.idDueno =: idUser", Mascota.class);
+        theQuery.setParameter("idUser", idDueno);
+
+        List<Mascota> mascotas = theQuery.getResultList();
+
+        List<String> misMascotas = new LinkedList<>();
+
+        for (int i = 0; i < mascotas.size(); i++) {
+            misMascotas.add(mascotas.get(i).getIdMascota() + " " + mascotas.get(i).getNombreMascota());
+        }
+
+        if (misMascotas.size() == 0){
+            misMascotas.add("No encontramos tus mascotas");
+            return misMascotas;
+        }else{
+            return misMascotas;
+        }
+
     }
 
 }

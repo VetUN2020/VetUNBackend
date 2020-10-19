@@ -1,9 +1,11 @@
 package com.vetun.apirest.controller;
 
+import com.vetun.apirest.entity.Mascota;
 import com.vetun.apirest.entity.Veterinaria;
 import com.vetun.apirest.service.VeterinaryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,14 +32,20 @@ public class VeterinaryRestController {
     }
 
     @GetMapping("/veterinarias/{veterinariaId}")
-    public Veterinaria getVeterinaria(@PathVariable int veterinariaID){
-        Veterinaria veterinaria = veterinaryService.findById(veterinariaID);
+    public Veterinaria getVeterinaria(@PathVariable int veterinariaId){
 
-        if(veterinaria == null) {
-            throw new RuntimeException("Veterinary id not found -"+veterinariaID);
+        Veterinaria veterinaria = veterinaryService.findById(veterinariaId);
+
+        if (veterinaria == null){
+            throw new RuntimeException("Veterinary id not found -"+veterinariaId);
         }
-        //retornará al usuario con id pasado en la url
+
         return veterinaria;
+    }
+
+    @GetMapping("/veterinarias/name")
+    public List<String> getVeterinaryNames(){
+        return veterinaryService.findAllName();
     }
 
 }
