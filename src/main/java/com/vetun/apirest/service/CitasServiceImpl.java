@@ -49,6 +49,11 @@ public class CitasServiceImpl implements CitasService{
     }
 
     @Override
+    public List<Citas> findByVeterinary(int IdVeterinary) {
+        return citasDao.findByVeterinary(IdVeterinary);
+    }
+
+    @Override
     public boolean checkAvailabilityByDateAndIdVeterinary(Date fecha, int IdVeterinaria) {
         return citasDao.checkAvailabilityByDateAndIdVeterinary(fecha,IdVeterinaria);
     }

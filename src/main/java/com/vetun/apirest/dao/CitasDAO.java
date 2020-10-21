@@ -21,6 +21,8 @@ public interface CitasDAO {
 
     public List<Citas> findByVeterinaryAndDate(int IdVeterinary, Date fecha);
 
+    public List<Citas> findByVeterinary(int IdVeterinary);
+
     public boolean checkAvailabilityByDateAndIdVeterinary(Date fecha, int IdVeterinaria);
 
 }
