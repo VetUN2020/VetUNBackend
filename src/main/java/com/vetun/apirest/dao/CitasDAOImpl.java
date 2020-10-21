@@ -90,6 +90,19 @@ public class CitasDAOImpl implements CitasDAO{
     }
 
     @Override
+    public List<Citas> findByVeterinary(int IdVeterinary) {
+
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query<Citas> theQuery = currentSession.createQuery("FROM Citas C WHERE C.idVeterinaria.idVeterinaria =: idV", Citas.class);
+        theQuery.setParameter("idV", IdVeterinary);
+
+        List<Citas> citas = theQuery.getResultList();
+
+        return citas;
+    }
+
+    @Override
     public boolean checkAvailabilityByDateAndIdVeterinary(Date fecha, int IdVeterinaria) {
 
         Session currentSession = entityManager.unwrap(Session.class);

@@ -80,6 +80,18 @@ public class CitasRestController {
         return cita;
     }
 
+    @GetMapping("/citas/ByVeterinary/{idVeterinaria}")
+    public List<Citas> findByVeterinary(@PathVariable int idVeterinaria) {
+
+        List<Citas> cita = citasService.findByVeterinary(idVeterinaria);
+
+        if (cita == null){
+            throw new RuntimeException("Cita no encontrada");
+        }
+
+        return cita;
+    }
+
     @GetMapping("/citas/Availability/{fecha}/{idVeterinaria}")
     public boolean checkAvailabilityByDateAndIdVeterinary(@PathVariable Date fecha, @PathVariable int idVeterinaria){
         return citasService.checkAvailabilityByDateAndIdVeterinary(fecha, idVeterinaria);
